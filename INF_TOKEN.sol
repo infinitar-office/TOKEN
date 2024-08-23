@@ -30,7 +30,7 @@ contract INFToken {
 
     constructor() {
         admin = msg.sender;
-        totalSupply = 1000000000 * 10**uint256(decimals);
+        totalSupply = 0;
         balanceOf[msg.sender] = totalSupply;
         emit Transfer(address(0), msg.sender, totalSupply);
     }
