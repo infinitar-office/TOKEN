@@ -2,10 +2,10 @@
 pragma solidity ^0.8.0;
 
 contract IGTToken {
-    string public name = "Infinitar Governance Token";
-    string public symbol = "IGT";
-    uint8 public decimals = 18;
-    uint256 public totalSupply;
+    string public constant name = "Infinitar Governance Token";
+    string public constant symbol = "IGT";
+    uint8 public constant decimals = 18;
+    uint256 public immutable totalSupply;
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
@@ -31,6 +31,7 @@ contract IGTToken {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
+        require(_value > 0, "Transfer value must be greater than zero");
         require(_to != address(0), "Invalid address");
         require(balanceOf[msg.sender] >= _value, "Insufficient balance");
         
@@ -49,6 +50,7 @@ contract IGTToken {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+        require(_value > 0, "TransferFrom value must be greater than zero");
         require(_from != address(0), "Invalid address");
         require(_to != address(0), "Invalid address");
         require(balanceOf[_from] >= _value, "Insufficient balance");
